@@ -49,6 +49,10 @@ class Instant():
         await chan.set_permissions(ctx.author.guild.default_role, read_message_history=False)
         await chan.set_permissions(ctx.author.guild.default_role, read_messages=False)
         await chan.set_permissions(self.bot.system.insider.role.team_a, read_messages=True)
+        chan = await category.create_text_channel("Team B")
+        await chan.set_permissions(ctx.author.guild.default_role, read_message_history=False)
+        await chan.set_permissions(ctx.author.guild.default_role, read_messages=False)
+        await chan.set_permissions(self.bot.system.insider.role.team_a, read_messages=True)
 
         category = await ctx.guild.create_category(name="生存者")
         chan = await category.create_text_channel("会議所")
