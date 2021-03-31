@@ -9,7 +9,6 @@ class System():
         self.status = "nothing"
         self.guild = None
         self.channel = Channels()
-        self.player = Player()
         self.inside = Inside()
 
 
@@ -19,19 +18,24 @@ class Channels():
         self.wolf = None
         self.fortun = None
 
-class Player():
-    def __init__(self):
-        self.yes = "no"
-        self.all = []
-        self.live = []
-        self.dead = []
 
 class Inside:
     def __init__(self):
         self.channel = None
-        self.role = Roles()
+        self.guild = None
+        self.role = Inside_Roles()
+        self.player = Inside_Player()
 
-class Roles():
+class Inside_Roles():
+    def __init__(self):
+        self.team_a = None
+        self.team_b = None
+
+class Inside_Player():
+    def __init__(self):
+        self.all = []
+
+class Inside_Channel():
     def __init__(self):
         self.team_a = None
         self.team_b = None
