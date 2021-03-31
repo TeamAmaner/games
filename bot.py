@@ -6,6 +6,8 @@ import discord
 import json
 import logging
 
+from lib.system import System
+
 
 
 class Zect(commands.Bot):
