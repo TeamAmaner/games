@@ -20,12 +20,12 @@ class Admin(commands.Cog):
     @commands.command()
     async def inside(self,ctx):
 
-        if ctx.author != self.bot.get_user(653785595075887104):
-            await ctx.send("あなたには使用する権限がありません。 \nYou don't have the privilege to use this.")
-            return
+        # if ctx.author != self.bot.get_user(653785595075887104):
+        #     await ctx.send("あなたには使用する権限がありません。 \nYou don't have the privilege to use this.")
+        #     return
 
         print("start")
-        self.system.inside.__init__()
+        self.system.insider.__init__()
 
         channels = ctx.guild.voice_channels
         voice_channel = discord.utils.get(channels, name="テストチャンネル")
@@ -34,10 +34,10 @@ class Admin(commands.Cog):
         await self.instant.make(ctx)
 
         self.system.insider.player.all = voice_channel.members
-        await ctx.send(self.bot.system.player.all)
+        await ctx.send(self.bot.system.insider.player.all)
         if not self.system.insider.player.all:
             await ctx.send("no one")
-            return
+            # return
         # if len(self.players) <= 5:
         #     await ctx.send("参加を希望したのが3名以下だったため、開始できません。\n停止します...")
         #     return
@@ -47,6 +47,57 @@ class Admin(commands.Cog):
         # await ctx.send(f"{txt}```")
         self.system.insider.guild = ctx.guild
         await self.insider.start(ctx)
+
+
+    @commands.command()
+    async def team_a(self,ctx):
+
+        # if ctx.author != self.bot.get_user(653785595075887104):
+        #     await ctx.send("あなたには使用する権限がありません。 \nYou don't have the privilege to use this.")
+        #     return
+
+        await ctx.author.add_roles(self.bot.system.insider.role.team_a)
+
+
+
+    @commands.command()
+    async def team_b(self,ctx):
+
+        # if ctx.author != self.bot.get_user(653785595075887104):
+        #     await ctx.send("あなたには使用する権限がありません。 \nYou don't have the privilege to use this.")
+        #     return
+
+        await ctx.author.add_roles(self.bot.system.insider.role.team_b)
+
+
+    @commands.command()
+    async def open(self,ctx):
+
+        chan = self.bot.system.insider.channel.team_a
+        await chan.set_permissions(ctx.author.guild.default_role, read_messages=True)
+
+        chan = self.bot.system.insider.channel.team_b
+        await chan.set_permissions(ctx.author.guild.default_role, read_messages=True)
+
+
+    @commands.command()
+    async def open(self,ctx):
+
+        chan = self.bot.system.insider.channel.team_a
+        await chan.set_permissions(ctx.author.guild.default_role, read_messages=False)
+
+        chan = self.bot.system.insider.channel.team_b
+        await chan.set_permissions(ctx.author.guild.default_role, read_messages=False)
+
+
+
+
+
+
+
+
+
+
 
 
     @commands.command()

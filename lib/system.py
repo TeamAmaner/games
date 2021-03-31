@@ -9,7 +9,7 @@ class System():
         self.status = "nothing"
         self.guild = None
         self.channel = Channels()
-        self.inside = Inside()
+        self.insider = Inside()
 
 
 class Channels():
@@ -25,6 +25,7 @@ class Inside:
         self.guild = None
         self.role = Inside_Roles()
         self.player = Inside_Player()
+        self.channel = Inside_Channel()
 
 class Inside_Roles():
     def __init__(self):

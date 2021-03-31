@@ -39,11 +39,9 @@ class Instant():
                 await rol.delete()
 
 
-        if not self.bot.system.insider.role.team_a:
-            self.bot.system.insider.role.team_a = await ctx.guild.create_role(name="Team A")
+        self.bot.system.insider.role.team_a = await ctx.guild.create_role(name="Team A")
 
-        if not self.bot.system.insider.role.team_b:
-            self.bot.system.insider.role.team_b = await ctx.guild.create_role(name="Team B")
+        self.bot.system.insider.role.team_b = await ctx.guild.create_role(name="Team B")
 
         category = ctx.channel.category
         for chan in category.text_channels:
@@ -52,17 +50,19 @@ class Instant():
             if chan.name == "Team B":
                 await chan.delete()
 
-        chan = await category.create_text_channel("Team A")
-        await chan.set_permissions(ctx.author.guild.default_role, read_message_history=False)
-        await chan.set_permissions(ctx.author.guild.default_role, read_messages=False)
-        await chan.set_permissions(self.bot.system.insider.role.team_a, read_messages=True)
-        self.bot.system.insider.channel.team_a = chan
+        self.bot.system.insider.channel.team_a = await category.create_text_channel("Team A")
+        self.bot.system.insider.channel.team_b = await category.create_text_channel("Team B")
 
-        chan = await category.create_text_channel("Team B")
-        await chan.set_permissions(ctx.author.guild.default_role, read_message_history=False)
-        await chan.set_permissions(ctx.author.guild.default_role, read_messages=False)
-        await chan.set_permissions(self.bot.system.insider.role.team_b, read_messages=True)
-        self.bot.system.insider.channel.team_b = chan
+
+        await self.bot.system.insider.channel.team_a.set_permissions(ctx.author.guild.default_role, read_messages=False)
+        await self.bot.system.insider.channel.team_a.set_permissions(ctx.author.guild.default_role, read_message_history=False)
+        await self.bot.system.insider.channel.team_b.set_permissions(ctx.author.guild.default_role, read_messages=False)
+        await self.bot.system.insider.channel.team_b.set_permissions(ctx.author.guild.default_role, read_message_history=False)
+
+        await self.bot.system.insider.channel.team_a.set_permissions(self.bot.system.insider.role.team_a, read_messages=True)
+        await self.bot.system.insider.channel.team_a.set_permissions(self.bot.system.insider.role.team_a, read_message_history=True)
+        await self.bot.system.insider.channel.team_b.set_permissions(self.bot.system.insider.role.team_b, read_messages=True)
+        await self.bot.system.insider.channel.team_b.set_permissions(self.bot.system.insider.role.team_b, read_message_history=True)
 
 
 

@@ -11,3 +11,8 @@ class Insider(commands.Cog):
     async def start(self,ctx):
         await ctx.send("ゲームを開始します")
         await self.send()
+
+    async def send(self):
+        channels = self.bot.system.insider.channel
+        await channels.team_a.send("Hand in Hand")
+        await channels.team_b.send("グリーンライツ・セレナーデ")
