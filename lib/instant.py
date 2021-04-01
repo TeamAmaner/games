@@ -7,7 +7,7 @@ from typing import Any
 
 
 
-class Instant():
+class Instant_Inside():
     def __init__(self, bot: Any):
         self.bot = bot
 
@@ -65,18 +65,12 @@ class Instant():
         await self.bot.system.insider.channel.team_b.set_permissions(self.bot.system.insider.role.team_b, read_message_history=True)
 
 
+class Instant_NGword():
+    def __init__(self,bot):
+        self.bot = bot
 
-    async def add(self):
-        channel = discord.utils.get(self.bot.system.guild.text_channels, name='人狼')
-        category = channel.category
-        for p in self.bot.system.player.all:
-            role = p.role
-            if role == "人狼":
-                continue
-
-            chan = discord.utils.get(self.bot.system.guild.text_channels, name=role)
-            if not chan:
-                chan = await category.create_text_channel(role)
-            await chan.set_permissions(self.bot.system.guild.roles[0],read_messages=False)
-            await chan.set_permissions(self.bot.system.role.killed,read_messages=True)
-            await chan.set_permissions(self.bot.system.role.no,read_messages=True)
+    async def make(self,ctx):
+        guild_roles = ctx.guild.roles
+        role = discord.utils.get(guild_roles, name="NGword")
+        if not role:
+            await ctx.guild.create_role(name="NGword")
