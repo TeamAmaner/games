@@ -22,6 +22,6 @@ class Zect(commands.Bot):
         self.slash = SlashCommand(self, sync_commands=True)
 
     async def on_ready(self):
-        status = discord.Game("d.py Sample")
+        status = discord.Game("NGワードゲーム")
         # status = discord.Game("メンテナンス中")
         await self.change_presence(activity=status)

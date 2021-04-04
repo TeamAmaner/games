@@ -7,6 +7,8 @@ BOT_TOKEN = setting.BOT
 
 extensions = [
     "cogs.admin",
+    "cogs.start",
+    "cogs.check",
 ]
 
 for extension in extensions:

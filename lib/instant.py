@@ -1,9 +1,12 @@
-# start.py
-
 import discord
 from discord.ext import commands
 
 from typing import Any
+from pymongo import MongoClient
+
+import setting
+
+MONGO_URL = setting.MONGO
 
 
 
@@ -70,6 +73,9 @@ class Instant_NGword():
         self.bot = bot
 
     async def make(self,ctx):
+        client = MongoClient(MONGO_URL)
+        db = client.users
+        db.drop_collection(db.user_id)
         guild_roles = ctx.guild.roles
         role = discord.utils.get(guild_roles, name="NGword")
         if not role:

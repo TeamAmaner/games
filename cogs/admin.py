@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from lib.instant import Instant
+from lib.instant import Instant_Inside
 from lib.insider import Insider
 
 
