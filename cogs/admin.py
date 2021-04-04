@@ -13,6 +13,11 @@ class Admin(commands.Cog):
         self.insider = Insider(bot)
 
 
+    async def cog_before_invoke(self, ctx):
+        if ctx.author.id != 653785595075887104:
+            await ctx.send("あなたには使用する権限がありません。 \nYou don't have the privilege to use this.")
+            return
+
     @commands.command()
     async def hello(self,ctx):
         await ctx.send("hello")
@@ -20,28 +25,17 @@ class Admin(commands.Cog):
 
     @commands.command()
     async def team_a(self,ctx):
-
-        # if ctx.author != self.bot.get_user(653785595075887104):
-        #     await ctx.send("あなたには使用する権限がありません。 \nYou don't have the privilege to use this.")
-        #     return
-
         await ctx.author.add_roles(self.bot.system.insider.role.team_a)
 
 
 
     @commands.command()
     async def team_b(self,ctx):
-
-        # if ctx.author != self.bot.get_user(653785595075887104):
-        #     await ctx.send("あなたには使用する権限がありません。 \nYou don't have the privilege to use this.")
-        #     return
-
         await ctx.author.add_roles(self.bot.system.insider.role.team_b)
 
 
     @commands.command()
     async def open(self,ctx):
-
         chan = self.bot.system.insider.channel.team_a
         await chan.set_permissions(ctx.author.guild.default_role, read_messages=True)
 
@@ -51,7 +45,6 @@ class Admin(commands.Cog):
 
     @commands.command()
     async def open(self,ctx):
-
         chan = self.bot.system.insider.channel.team_a
         await chan.set_permissions(ctx.author.guild.default_role, read_messages=False)
 
